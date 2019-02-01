@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">ثبت نام</string>
+    <string name="successfulConfirm">اطلاعات شما با موفقیت ثبت شد</string>
+    <string name="fname">نام :</string>
+    <string name="famliy">نام خانوادگی :</string>
+    <string name="age">سن :</string>
+    <string name="email">ایمیل :</string>
+    <string name="mobile">موبایل :</string>
+    <string name="confirm">تایید :</string>
+    <string name="enter_your_fisrt_name">نام خود را وارد نمایید</string>
+    <string name="enter_your_last_name">نام خانوادگی خود را وارد نمایید</string>
+    <string name="enter_your_age">سن خود را وارد نمایید</string>
+    <string name="enter_your_email_address">آدرس ایمیل خود را وارد نمایید</string>
+    <string name="enter_your_mobile_number">شماره موبایل خود را وارد نمایید</string>
+    <string name="register_me">ثیت نام</string>
+</resources>

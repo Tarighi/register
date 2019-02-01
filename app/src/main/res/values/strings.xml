@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Registeration</string>
+    <string name="successfulConfirm">Your information has been successfully registered</string>
+    <string name="fname">Name :</string>
+    <string name="famliy">Famliy :</string>
+    <string name="age">Age :</string>
+    <string name="email">Email :</string>
+    <string name="mobile">Mobile :</string>
+    <string name="confirm">Confirm</string>
+    <string name="enter_your_fisrt_name">enter your fisrt name</string>
+    <string name="enter_your_last_name">enter your last name</string>
+    <string name="enter_your_age">enter your age</string>
+    <string name="enter_your_email_address">enter your email address</string>
+    <string name="enter_your_mobile_number">enter your mobile number</string>
+    <string name="register_me">Register me</string>
+</resources>
