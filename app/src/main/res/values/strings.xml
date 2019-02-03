@@ -6,11 +6,16 @@
     <string name="age">Age :</string>
     <string name="email">Email :</string>
     <string name="mobile">Mobile :</string>
-    <string name="confirm">Confirm</string>
+    <string name="confirm">Back</string>
     <string name="enter_your_fisrt_name">enter your fisrt name</string>
     <string name="enter_your_last_name">enter your last name</string>
     <string name="enter_your_age">enter your age</string>
     <string name="enter_your_email_address">enter your email address</string>
     <string name="enter_your_mobile_number">enter your mobile number</string>
     <string name="register_me">Register me</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="register">Register</string>
+    <string name="wellcome">Wellcome to my app... 🙋‍</string>
+    <string name="show_my_profile">Show My Profile</string>
+    <string name="wellcome_dear">Wellcome Dear</string>
 </resources>

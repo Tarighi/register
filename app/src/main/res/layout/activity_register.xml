@@ -4,34 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ConfirmActivity">
+    android:padding="4dp"
+    tools:context=".RegisterActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/backwithborder4reg"
         android:orientation="vertical"
-        >
+        android:padding="4dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp">
+
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
+                android:padding="5dp"
                 android:text="@string/fname"
-                android:textSize="25sp"
-                android:padding="5dp"
-                />
-            <TextView
-                android:id="@+id/txtName"
+                android:textSize="25sp" />
+
+            <EditText
+                android:id="@+id/edtName"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                
                 android:background="@drawable/backwithborder4edt"
+                android:hint="@string/enter_your_fisrt_name"
                 android:inputType="text"
-                android:textSize="25sp"
                 android:padding="5dp"
+                android:textSize="25sp"
 
                 />
         </LinearLayout>
@@ -40,110 +43,115 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp">
+
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
+                android:padding="5dp"
                 android:text="@string/famliy"
-                android:textSize="25sp"
-                android:padding="5dp"
-                />
-            <TextView
-                android:id="@+id/txtFamliy"
+                android:textSize="25sp" />
+
+            <EditText
+                android:id="@+id/edtFamliy"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                
                 android:background="@drawable/backwithborder4edt"
+                android:hint="@string/enter_your_last_name"
                 android:inputType="text"
-                android:textSize="25sp"
                 android:padding="5dp"
-                />
+                android:textSize="25sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp">
+
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
+                android:padding="5dp"
                 android:text="@string/age"
-                android:textSize="25sp"
-                android:padding="5dp"
-                />
-            <TextView
-                android:id="@+id/txtAge"
+                android:textSize="25sp" />
+
+            <EditText
+                android:id="@+id/edtAge"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                
+
                 android:background="@drawable/backwithborder4edt"
+                android:hint="@string/enter_your_age"
                 android:inputType="number"
-                android:textSize="25sp"
                 android:padding="5dp"
-                />
+                android:textSize="25sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp">
+
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
+                android:padding="5dp"
                 android:text="@string/email"
-                android:textSize="25sp"
-                android:padding="5dp"
-                />
-            <TextView
-                android:id="@+id/txtEmail"
+                android:textSize="25sp" />
+
+            <EditText
+                android:id="@+id/edtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                
+
                 android:background="@drawable/backwithborder4edt"
+                android:hint="@string/enter_your_email_address"
                 android:inputType="textEmailAddress"
-                android:textSize="25sp"
                 android:padding="5dp"
-                />
+                android:textSize="25sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp">
+
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
-                android:text="@string/mobile"
-                android:textSize="25sp"
                 android:padding="5dp"
-                />
-            <TextView
-                android:id="@+id/txtMobile"
+                android:text="@string/mobile"
+                android:textSize="25sp" />
+
+            <EditText
+                android:id="@+id/edtMobile"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                
                 android:background="@drawable/backwithborder4edt"
+                android:hint="@string/enter_your_mobile_number"
                 android:inputType="phone"
-                android:textSize="25sp"
                 android:padding="5dp"
-                />
+                android:textSize="25sp" />
         </LinearLayout>
     </LinearLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="25dp"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:layout_margin="25dp">
+
         <Button
-            android:id="@+id/btnSubmit"
+            android:id="@+id/btnRegister"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:textSize="25sp"
-            android:padding="5dp"
-            android:text="@string/confirm"
-            android:textAllCaps="false"
             android:background="@drawable/backwithborder4btn"
-            />
+            android:onClick="registerMe"
+            android:padding="5dp"
+            android:text="@string/register_me"
+            android:textAllCaps="false"
+            android:textSize="25sp" />
 
     </RelativeLayout>
+
 </RelativeLayout>

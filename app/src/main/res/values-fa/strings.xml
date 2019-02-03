@@ -1,16 +1,21 @@
 <resources>
     <string name="app_name">ثبت نام</string>
-    <string name="successfulConfirm">اطلاعات شما با موفقیت ثبت شد</string>
-    <string name="fname">نام :</string>
-    <string name="famliy">نام خانوادگی :</string>
+    <string name="successfulConfirm">اطلاعاتت با موفقیت تغییر کرد</string>
+    <string name="fname">اسم :</string>
+    <string name="famliy">فامیل :</string>
     <string name="age">سن :</string>
     <string name="email">ایمیل :</string>
     <string name="mobile">موبایل :</string>
-    <string name="confirm">تایید :</string>
-    <string name="enter_your_fisrt_name">نام خود را وارد نمایید</string>
-    <string name="enter_your_last_name">نام خانوادگی خود را وارد نمایید</string>
-    <string name="enter_your_age">سن خود را وارد نمایید</string>
-    <string name="enter_your_email_address">آدرس ایمیل خود را وارد نمایید</string>
-    <string name="enter_your_mobile_number">شماره موبایل خود را وارد نمایید</string>
-    <string name="register_me">ثیت نام</string>
+    <string name="confirm">بازگشت</string>
+    <string name="enter_your_fisrt_name">اسمتو بنویس</string>
+    <string name="enter_your_last_name">اسم فامیلیتو بنویس</string>
+    <string name="enter_your_age">سنتو وارد کن</string>
+    <string name="enter_your_email_address">آدرس ایمیلتو بنویس</string>
+    <string name="enter_your_mobile_number">شماره موبایلتو بنویس</string>
+    <string name="register_me">ثبت نام</string>
+    <string name="edit_profile">ویرایش پروفایل</string>
+    <string name="register">ثبت نام</string>
+    <string name="wellcome">به برنامه من خوش اومدی... 🙋‍</string>
+    <string name="show_my_profile">مشاهده پروفایل</string>
+    <string name="wellcome_dear">خوش اومدی </string>
 </resources>
