@@ -27,4 +27,5 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha4'
     implementation "com.orhanobut:hawk:2.0.1"
+    implementation "com.github.akshay2211:PixImagePicker:1.2.4"
 }

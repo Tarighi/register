@@ -18,4 +18,5 @@
     <string name="wellcome">Wellcome to my app... 🙋‍</string>
     <string name="show_my_profile">Show My Profile</string>
     <string name="wellcome_dear">Wellcome Dear</string>
+    <string name="clear_form">Clear form</string>
 </resources>

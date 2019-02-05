@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import android.transition.Visibility;
@@ -59,6 +60,10 @@ public class MainActivity extends AppCompatActivity {
             btnShow.setVisibility(View.VISIBLE);
             imgAvatar.setVisibility(View.VISIBLE);
             btnEdit.setText(R.string.edit_profile);
+            Uri selectedImage=Uri.parse(Hawk.get(Constant.AVATAR).toString());
+            ImageView imageView = (ImageView) findViewById(R.id.imgAvatar);
+            imageView.setImageURI(selectedImage);
+            imageView.setTag(selectedImage.toString());
         }
         else{
             wellcome.setText(R.string.wellcome);

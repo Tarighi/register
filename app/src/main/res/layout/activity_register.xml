@@ -127,11 +127,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/backwithborder4edt"
+
                 android:hint="@string/enter_your_mobile_number"
                 android:inputType="phone"
                 android:padding="5dp"
                 android:textSize="25sp" />
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imgAvatar"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="44dp"
+            android:background="@drawable/backwithborder4img"
+            android:padding="5dp"
+            android:onClick="SelectPhoto"
+            android:textAllCaps="false" />
     </LinearLayout>
 
     <RelativeLayout
@@ -140,17 +152,37 @@
         android:layout_alignParentBottom="true"
         android:layout_margin="25dp">
 
-        <Button
-            android:id="@+id/btnRegister"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:background="@drawable/backwithborder4btn"
-            android:onClick="registerMe"
-            android:padding="5dp"
-            android:text="@string/register_me"
-            android:textAllCaps="false"
-            android:textSize="25sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btnRegister"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/backwithborder4btn"
+                android:onClick="RegisterMe"
+                android:padding="5dp"
+                android:text="@string/register_me"
+                android:textAllCaps="false"
+                android:textSize="25sp"
+                android:layout_margin="20px"/>
+
+            <Button
+                android:id="@+id/btnClear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/backwithborder4btn"
+                android:onClick="registerMe"
+                android:padding="5dp"
+                android:text="@string/clear_form"
+                android:textAllCaps="false"
+                android:textSize="25sp"
+                android:layout_margin="20px"/>
+        </LinearLayout>
+
 
     </RelativeLayout>
 
