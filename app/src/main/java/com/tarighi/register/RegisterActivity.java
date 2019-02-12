@@ -5,78 +5,119 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fxn.pix.Pix;
 import com.fxn.utility.PermUtil;
-import com.orhanobut.hawk.Hawk;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
 
 public class RegisterActivity extends AppCompatActivity {
 
+
+    UserInfo currentUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        Hawk.init(RegisterActivity.this).build();
 
-        if (Hawk.contains(Constant.Name)) {
-            ((EditText) findViewById(R.id.edtName)).setText(Hawk.get(Constant.Name).toString());
-            ((EditText) findViewById(R.id.edtFamliy)).setText(Hawk.get(Constant.Famliy).toString());
-            ((EditText) findViewById(R.id.edtAge)).setText(Hawk.get(Constant.Age).toString());
-            ((EditText) findViewById(R.id.edtEmail)).setText(Hawk.get(Constant.Email).toString());
-            ((EditText) findViewById(R.id.edtMobile)).setText(Hawk.get(Constant.Mobile).toString());
-            Uri selectedImage=Uri.parse(Hawk.get(Constant.AVATAR).toString());
-            ImageView imageView = (ImageView) findViewById(R.id.imgAvatar);
-            imageView.setImageURI(selectedImage);
-            imageView.setTag(selectedImage.toString());
+        currentUser= UserController.INSTANCE.getCurrentUser();
+        if (currentUser!=null) {
+
+            ((EditText) findViewById(R.id.edtName)).setText(currentUser.FirstName);
+            ((EditText) findViewById(R.id.edtFamliy)).setText(currentUser.Family);
+            ((EditText) findViewById(R.id.edtAge)).setText(Integer.toString(currentUser.Age));
+            ((EditText) findViewById(R.id.edtEmail)).setText(currentUser.Email);
+            ((EditText) findViewById(R.id.edtMobile)).setText(Long.toString(currentUser.Mobile));
+            if(currentUser.AVATAR!=null && currentUser.AVATAR.length()>0) {
+                Uri selectedImage = Uri.parse(currentUser.AVATAR);
+                RoundedImageView imageView = (RoundedImageView) findViewById(R.id.imgAvatar);
+                imageView.setImageURI(selectedImage);
+                imageView.setTag(selectedImage.toString());
+            }
         }
 
+        Button btnRegister=findViewById(R.id.btnRegister);
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText edtName= findViewById(R.id.edtName);
+                EditText edtFamliy= findViewById(R.id.edtFamliy);
+                EditText edtAge= findViewById(R.id.edtAge);
+                EditText edtEmail= findViewById(R.id.edtEmail);
+                EditText edtMobile= findViewById(R.id.edtMobile);
+                RoundedImageView imgAvatar =(RoundedImageView) findViewById(R.id.imgAvatar);
+                String FirstName = edtName.getText().toString();
+                String Family = edtFamliy.getText().toString();
+                if(edtAge.getText().toString().length()==0)
+                {
+                    Toast.makeText(RegisterActivity.this, "enter your age", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                int Age =Integer.parseInt (edtAge.getText().toString());
+                String Email = edtEmail.getText().toString();
+                if(edtMobile.getText().toString().length()==0)
+                {
+                    Toast.makeText(RegisterActivity.this, "enter your mobile", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                long Mobile = Long.parseLong(edtMobile.getText().toString());
+                if(imgAvatar.getTag()==null)
+                {
+                    Toast.makeText(RegisterActivity.this, "select your avatar", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                String AVATAR = imgAvatar.getTag().toString();
 
-    }
+                if (Mobile > 0 && FirstName.length() > 0 &&  Family.length() > 0) {
+                    if(currentUser==null)
+                        currentUser=new UserInfo();
+                    currentUser.Mobile=Mobile;
+                    currentUser.FirstName=FirstName;
+                    currentUser.Family=Family;
+                    currentUser.Age=Age;
+                    currentUser.Email=Email;
+                    currentUser.AVATAR=AVATAR;
 
-    public void RegisterMe(View v) {
+                    UserController.INSTANCE.addOrUpdateUser(currentUser);
+                    UserController.INSTANCE.signIn(currentUser);
+                } else {
+                    UserController.INSTANCE.signOut();
+                }
+                setResult(Activity.RESULT_OK);
+                finish();
+            }
+        });
 
-        String Name = ((EditText) findViewById(R.id.edtName)).getText().toString();
-        String Famliy = ((EditText) findViewById(R.id.edtFamliy)).getText().toString();
-        String Age = ((EditText) findViewById(R.id.edtAge)).getText().toString();
-        String Email = ((EditText) findViewById(R.id.edtEmail)).getText().toString();
-        String Mobile = ((EditText) findViewById(R.id.edtMobile)).getText().toString();
-        String AVATAR = ((ImageView) findViewById(R.id.imgAvatar)).getTag().toString();
+        Button btnClear=findViewById(R.id.btnClear);
+        btnClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((EditText) findViewById(R.id.edtName)).setText("");
+                ((EditText) findViewById(R.id.edtFamliy)).setText("");
+                ((EditText) findViewById(R.id.edtAge)).setText("");
+                ((EditText) findViewById(R.id.edtEmail)).setText("");
+                ((EditText) findViewById(R.id.edtMobile)).setText("");
+                ((RoundedImageView) findViewById(R.id.imgAvatar)).setTag("");
+                ((RoundedImageView) findViewById(R.id.imgAvatar)).setImageURI(Uri.parse(""));
+            }
+        });
 
-        if (Name.length() > 0) {
-            Hawk.put(Constant.Name, Name);
-            Hawk.put(Constant.Famliy, Famliy);
-            Hawk.put(Constant.Age, Age);
-            Hawk.put(Constant.Email, Email);
-            Hawk.put(Constant.Mobile, Mobile);
-            Hawk.put(Constant.AVATAR, AVATAR);
+        RoundedImageView imgAvatar=findViewById(R.id.imgAvatar);
+        imgAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Pix.start(RegisterActivity.this, Constant.ImageSelectorRequestCode);
+            }
+        });
 
-        } else {
-            Hawk.delete(Constant.Name);
-            Hawk.delete(Constant.Famliy);
-            Hawk.delete(Constant.Age);
-            Hawk.delete(Constant.Email);
-            Hawk.delete(Constant.Mobile);
-            Hawk.delete(Constant.AVATAR);
-        }
-        setResult(Activity.RESULT_OK);
-        finish();
 
-    }
-
-    protected void SelectPhoto(View v) {
-        Pix.start(RegisterActivity.this, Constant.ImageSelectorRequestCode);
     }
 
     @Override
@@ -85,8 +126,8 @@ public class RegisterActivity extends AppCompatActivity {
         if (resultCode == Activity.RESULT_OK && requestCode == Constant.ImageSelectorRequestCode) {
             ArrayList<String> returnValue = data.getStringArrayListExtra(Pix.IMAGE_RESULTS);
 
-            ImageView imageView = (ImageView) findViewById(R.id.imgAvatar);
-            Uri selectedImage=Uri.parse(returnValue.get(0));
+            RoundedImageView imageView = (RoundedImageView) findViewById(R.id.imgAvatar);
+            Uri selectedImage = Uri.parse(returnValue.get(0));
             imageView.setImageURI(selectedImage);
             imageView.setTag(selectedImage.toString());
 
@@ -108,4 +149,6 @@ public class RegisterActivity extends AppCompatActivity {
             }
         }
     }
+
+
 }

@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Registeration</string>
     <string name="successfulConfirm">Your information has been successfully registered</string>
+    <string name="username">UserName :</string>
     <string name="fname">Name :</string>
     <string name="famliy">Famliy :</string>
     <string name="age">Age :</string>
@@ -19,4 +20,22 @@
     <string name="show_my_profile">Show My Profile</string>
     <string name="wellcome_dear">Wellcome Dear</string>
     <string name="clear_form">Clear form</string>
+    <string name="show_list">Show Users</string>
+    <string name="sign_in">Sign In</string>
+    <string name="no_any_user">No Any User Defined</string>
+    <string name="login_welcome_msg">WellCome To Application</string>
+    <string name="login_wrong_mobile">Please Enter Correct Mobile Number</string>
+    <string name="login_empty_mobile">Enter Mobile Number to Sigin</string>
+
+    <string-array name="planets_array">
+        <item>Mercury</item>
+        <item>Venus</item>
+        <item>Earth</item>
+        <item>Mars</item>
+        <item>Jupiter</item>
+        <item>Saturn</item>
+        <item>Uranus</item>
+        <item>Neptune</item>
+    </string-array>
+
 </resources>

@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">ثبت نام</string>
     <string name="successfulConfirm">اطلاعاتت با موفقیت تغییر کرد</string>
+    <string name="username">نام کاربری :</string>
     <string name="fname">اسم :</string>
     <string name="famliy">فامیل :</string>
     <string name="age">سن :</string>
@@ -18,5 +19,12 @@
     <string name="wellcome">به برنامه من خوش اومدی... 🙋‍</string>
     <string name="show_my_profile">مشاهده پروفایل</string>
     <string name="wellcome_dear">خوش اومدی </string>
-    <string name="clear_form">Clear form</string>
+    <string name="clear_form">همه رو پاک کن</string>
+    <string name="show_list">لیست رو نشون بده</string>
+    <string name="sign_in">ورود</string>
+    <string name="no_any_user">هیچ کاربری تعریف نشده است</string>
+    <string name="login_welcome_msg">خوش آمدید</string>
+    <string name="login_wrong_mobile">لطفا شماره موبایل درست را وارد نمایید</string>
+    <string name="login_empty_mobile">برای ورود شماره موبایل خود را وارد نمایید</string>
+
 </resources>

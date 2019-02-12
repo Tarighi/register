@@ -1,43 +1,47 @@
 package com.tarighi.register;
 
 import androidx.appcompat.app.AppCompatActivity;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.orhanobut.hawk.Hawk;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 public class ConfirmActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_confirm);
+        UserInfo currentUser= UserController.INSTANCE.getCurrentUser();
 
-        ((TextView)findViewById(R.id.txtName)).setText(Hawk.get(Constant.Name).toString());
-        ((TextView)findViewById(R.id.txtFamliy)).setText(Hawk.get(Constant.Famliy).toString());
-        ((TextView)findViewById(R.id.txtAge)).setText(Hawk.get(Constant.Age).toString());
-        ((TextView)findViewById(R.id.txtEmail)).setText(Hawk.get(Constant.Email).toString());
-        ((TextView)findViewById(R.id.txtMobile)).setText(Hawk.get(Constant.Mobile).toString());
+        if (currentUser!=null) {
 
-        Uri selectedImage=Uri.parse(Hawk.get(Constant.AVATAR).toString());
-        ImageView imageView = (ImageView) findViewById(R.id.imgAvatar);
-        imageView.setImageURI(selectedImage);
-        imageView.setTag(selectedImage.toString());
-
-        Button btnSubmit =findViewById(R.id.btnSubmit);
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
+            setContentView(R.layout.activity_confirm);
+            ((TextView) findViewById(R.id.txtName)).setText(currentUser.FirstName);
+            ((TextView) findViewById(R.id.txtFamliy)).setText(currentUser.Family);
+            ((TextView) findViewById(R.id.txtAge)).setText(Integer.toString(currentUser.Age));
+            ((TextView) findViewById(R.id.txtEmail)).setText(currentUser.Email);
+            ((TextView) findViewById(R.id.txtMobile)).setText(Long.toString( currentUser.Mobile));
+            if( currentUser.AVATAR!=null && currentUser.AVATAR.length()>0) {
+                Uri selectedImage = Uri.parse(currentUser.AVATAR);
+                RoundedImageView imageView = (RoundedImageView) findViewById(R.id.imgAvatar);
+                imageView.setImageURI(selectedImage);
+                imageView.setTag(selectedImage.toString());
             }
-        });
+
+            Button btnSubmit = findViewById(R.id.btnSubmit);
+            btnSubmit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
+        }
+        else{
+            finish();
+        }
     }
 
 

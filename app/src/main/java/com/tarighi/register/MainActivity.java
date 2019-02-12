@@ -7,23 +7,20 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-
-import android.transition.Visibility;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.orhanobut.hawk.Hawk;
+import com.makeramen.roundedimageview.RoundedImageView;
+
 public class MainActivity extends AppCompatActivity {
 
+    UserInfo currentUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Hawk.init(MainActivity.this).build();
 
         SetView();
 
@@ -44,32 +41,46 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent,Constant.ConfirmRequestCode);
             }
         });
+//
+        Button btnViewList =findViewById(R.id.btnViewList);
+        btnViewList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(MainActivity.this,RecyclerActivity.class);
+                startActivityForResult(intent,Constant.RecyclerRequestCode);
+            }
+        });
+
+
     }
 
     private void SetView()
     {
-        TextView wellcome =findViewById(R.id.wellcome);
-        Button btnEdit =findViewById(R.id.btnEdit);
-        Button btnShow =findViewById(R.id.btnShow);
-        ImageView imgAvatar =findViewById(R.id.imgAvatar);
-        if(Hawk.contains(Constant.Name)){
+        try {
+            TextView wellcome = findViewById(R.id.wellcome);
+            Button btnEdit = findViewById(R.id.btnEdit);
+            Button btnShow = findViewById(R.id.btnShow);
+            RoundedImageView imgAvatar = findViewById(R.id.imgAvatar);
+            currentUser = UserController.INSTANCE.getCurrentUser();
+            if (currentUser != null) {
 
-            String name=Hawk.get(Constant.Name);
+                wellcome.setText(getString(R.string.wellcome_dear) + " " + currentUser.GetFullName());
+                btnShow.setVisibility(View.VISIBLE);
+                imgAvatar.setVisibility(View.VISIBLE);
+                btnEdit.setText(R.string.edit_profile);
 
-            wellcome.setText(getString(R.string.wellcome_dear)+" "+ name);
-            btnShow.setVisibility(View.VISIBLE);
-            imgAvatar.setVisibility(View.VISIBLE);
-            btnEdit.setText(R.string.edit_profile);
-            Uri selectedImage=Uri.parse(Hawk.get(Constant.AVATAR).toString());
-            ImageView imageView = (ImageView) findViewById(R.id.imgAvatar);
-            imageView.setImageURI(selectedImage);
-            imageView.setTag(selectedImage.toString());
+                if (currentUser.AVATAR != null && currentUser.AVATAR.length() > 0) {
+                    Uri selectedImage = Uri.parse(currentUser.AVATAR);
+                    RoundedImageView imageView = findViewById(R.id.imgAvatar);
+                    imageView.setImageURI(selectedImage);
+                    imageView.setTag(selectedImage.toString());
+                }
+            } else {
+                finish();
+            }
         }
-        else{
-            wellcome.setText(R.string.wellcome);
-            btnShow.setVisibility(View.GONE);
-            imgAvatar.setVisibility(View.GONE);
-            btnEdit.setText(R.string.register);
+        catch (Exception ex) {
+            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -79,9 +90,7 @@ public class MainActivity extends AppCompatActivity {
         if(requestCode==Constant.RegisterRequestCode){
             if(resultCode== Activity.RESULT_OK){
                 SetView();
-                if(Hawk.contains(Constant.Name)) {
-                    Toast.makeText(this, getString(R.string.successfulConfirm), Toast.LENGTH_LONG).show();
-                }
+                Toast.makeText(this, getString(R.string.successfulConfirm), Toast.LENGTH_LONG).show();
             }
 
         }

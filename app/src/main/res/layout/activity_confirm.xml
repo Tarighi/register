@@ -20,7 +20,7 @@
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:text="@string/fname"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:padding="5dp"
                 />
             <TextView
@@ -28,9 +28,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 
-                android:background="@drawable/backwithborder4edt"
+                android:background="@drawable/backwithborder4txt"
                 android:inputType="text"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:padding="5dp"
 
                 />
@@ -44,7 +44,7 @@
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:text="@string/famliy"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:padding="5dp"
                 />
             <TextView
@@ -52,9 +52,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 
-                android:background="@drawable/backwithborder4edt"
+                android:background="@drawable/backwithborder4txt"
                 android:inputType="text"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:padding="5dp"
                 />
         </LinearLayout>
@@ -67,7 +67,7 @@
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:text="@string/age"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:padding="5dp"
                 />
             <TextView
@@ -75,9 +75,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 
-                android:background="@drawable/backwithborder4edt"
+                android:background="@drawable/backwithborder4txt"
                 android:inputType="number"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:padding="5dp"
                 />
         </LinearLayout>
@@ -90,7 +90,7 @@
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:text="@string/email"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:padding="5dp"
                 />
             <TextView
@@ -98,9 +98,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 
-                android:background="@drawable/backwithborder4edt"
+                android:background="@drawable/backwithborder4txt"
                 android:inputType="textEmailAddress"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:padding="5dp"
                 />
         </LinearLayout>
@@ -113,7 +113,7 @@
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:text="@string/mobile"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:padding="5dp"
                 />
             <TextView
@@ -121,21 +121,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 
-                android:background="@drawable/backwithborder4edt"
+                android:background="@drawable/backwithborder4txt"
                 android:inputType="phone"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:padding="5dp"
                 />
         </LinearLayout>
-        <ImageView
+        <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/imgAvatar"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_gravity="center"
             android:layout_marginTop="44dp"
-            android:background="@drawable/backwithborder4img"
-            android:padding="5dp"
-            android:textAllCaps="false" />
+            android:background="@drawable/ic_launcher_background"
+            android:scaleType="fitXY"
+            app:riv_corner_radius="30dip"
+            app:riv_border_width="2dip"
+            app:riv_border_color="#333333"
+            app:riv_mutate_background="true"
+            app:riv_tile_mode="repeat"
+            app:riv_oval="true"
+            />
     </LinearLayout>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -147,7 +153,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:padding="5dp"
             android:text="@string/confirm"
             android:textAllCaps="false"
