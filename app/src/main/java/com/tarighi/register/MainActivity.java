@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         timingController=new TimingController();
-        
+
         timingController.callTimingsAPI(currentUser.City);
         timingController.setOnAPIResponseEventListener(new OnAPIResponseEventListener() {
             @Override
