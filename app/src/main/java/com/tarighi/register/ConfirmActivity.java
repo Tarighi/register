@@ -30,6 +30,7 @@ public class ConfirmActivity extends AppCompatActivity {
                 imageView.setImageURI(selectedImage);
                 imageView.setTag(selectedImage.toString());
             }
+            ((TextView) findViewById(R.id.txtCity)).setText(currentUser.City);
 
             Button btnSubmit = findViewById(R.id.btnSubmit);
             btnSubmit.setOnClickListener(new View.OnClickListener() {

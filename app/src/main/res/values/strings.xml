@@ -7,6 +7,7 @@
     <string name="age">Age :</string>
     <string name="email">Email :</string>
     <string name="mobile">Mobile :</string>
+    <string name="city">City :</string>
     <string name="confirm">Back</string>
     <string name="enter_your_fisrt_name">enter your fisrt name</string>
     <string name="enter_your_last_name">enter your last name</string>
@@ -27,15 +28,40 @@
     <string name="login_wrong_mobile">Please Enter Correct Mobile Number</string>
     <string name="login_empty_mobile">Enter Mobile Number to Sigin</string>
 
-    <string-array name="planets_array">
-        <item>Mercury</item>
-        <item>Venus</item>
-        <item>Earth</item>
-        <item>Mars</item>
-        <item>Jupiter</item>
-        <item>Saturn</item>
-        <item>Uranus</item>
-        <item>Neptune</item>
+    <string name="enter_your_city">Enter Your City</string>
+
+    <string-array name="cities_array">
+        <item>Tehran</item>
+        <item>Ahvaz</item>
+        <item>Arak</item>
+        <item>Ardabil</item>
+        <item>Bandar Abbas</item>
+        <item>Birjand</item>
+        <item>Bojnourd</item>
+        <item>Bushehr</item>
+        <item>Gorgan</item>
+        <item>Hamadan</item>
+        <item>Ilam</item>
+        <item>Isfahan</item>
+        <item>Karaj</item>
+        <item>Kerman</item>
+        <item>Kermanshah</item>
+        <item>Khorramabad</item>
+        <item>Mashhad</item>
+        <item>Qazvin</item>
+        <item>Qom</item>
+        <item>Rasht</item>
+        <item>Sanandaj</item>
+        <item>Sari</item>
+        <item>Semnan</item>
+        <item>Shahrekord</item>
+        <item>Shiraz</item>
+        <item>Tabriz</item>
+        <item>Urmia</item>
+        <item>Yasuj</item>
+        <item>Yazd</item>
+        <item>Zahedan</item>
+        <item>Zanjan</item>
     </string-array>
 
 </resources>

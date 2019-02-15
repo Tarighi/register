@@ -102,6 +102,7 @@ public final class UserController {
             admin.Family = "Tarighi";
             admin.Mobile = 1;
             admin.Id = 1;
+            admin.City = "Tehran";
             this.addUser(admin);
         }
     }

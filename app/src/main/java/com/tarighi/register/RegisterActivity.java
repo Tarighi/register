@@ -8,8 +8,11 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fxn.pix.Pix;
@@ -22,68 +25,84 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     UserInfo currentUser;
+    Spinner sprCity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        currentUser= UserController.INSTANCE.getCurrentUser();
-        if (currentUser!=null) {
+        sprCity = findViewById(R.id.sprCity);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.cities_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sprCity.setAdapter(adapter);
+
+        currentUser = UserController.INSTANCE.getCurrentUser();
+        if (currentUser != null) {
 
             ((EditText) findViewById(R.id.edtName)).setText(currentUser.FirstName);
             ((EditText) findViewById(R.id.edtFamliy)).setText(currentUser.Family);
             ((EditText) findViewById(R.id.edtAge)).setText(Integer.toString(currentUser.Age));
             ((EditText) findViewById(R.id.edtEmail)).setText(currentUser.Email);
             ((EditText) findViewById(R.id.edtMobile)).setText(Long.toString(currentUser.Mobile));
-            if(currentUser.AVATAR!=null && currentUser.AVATAR.length()>0) {
+            if (currentUser.AVATAR != null && currentUser.AVATAR.length() > 0) {
                 Uri selectedImage = Uri.parse(currentUser.AVATAR);
                 RoundedImageView imageView = (RoundedImageView) findViewById(R.id.imgAvatar);
                 imageView.setImageURI(selectedImage);
                 imageView.setTag(selectedImage.toString());
             }
+            if (currentUser.City != null && currentUser.City.length() > 0) {
+
+                int spinnerPosition = adapter.getPosition(currentUser.City);
+                sprCity.setSelection(spinnerPosition);
+            }
         }
 
-        Button btnRegister=findViewById(R.id.btnRegister);
+        Button btnRegister = findViewById(R.id.btnRegister);
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText edtName= findViewById(R.id.edtName);
-                EditText edtFamliy= findViewById(R.id.edtFamliy);
-                EditText edtAge= findViewById(R.id.edtAge);
-                EditText edtEmail= findViewById(R.id.edtEmail);
-                EditText edtMobile= findViewById(R.id.edtMobile);
-                RoundedImageView imgAvatar =(RoundedImageView) findViewById(R.id.imgAvatar);
+                EditText edtName = findViewById(R.id.edtName);
+                EditText edtFamliy = findViewById(R.id.edtFamliy);
+                EditText edtAge = findViewById(R.id.edtAge);
+                EditText edtEmail = findViewById(R.id.edtEmail);
+                EditText edtMobile = findViewById(R.id.edtMobile);
+                RoundedImageView imgAvatar = (RoundedImageView) findViewById(R.id.imgAvatar);
+                sprCity = findViewById(R.id.sprCity);
                 String FirstName = edtName.getText().toString();
                 String Family = edtFamliy.getText().toString();
-                if(edtAge.getText().toString().length()==0)
-                {
+                if (edtAge.getText().toString().length() == 0) {
                     Toast.makeText(RegisterActivity.this, "enter your age", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                int Age =Integer.parseInt (edtAge.getText().toString());
+                int Age = Integer.parseInt(edtAge.getText().toString());
                 String Email = edtEmail.getText().toString();
-                if(edtMobile.getText().toString().length()==0)
-                {
+                if (edtMobile.getText().toString().length() == 0) {
                     Toast.makeText(RegisterActivity.this, "enter your mobile", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 long Mobile = Long.parseLong(edtMobile.getText().toString());
-                if(imgAvatar.getTag()==null)
-                {
+                if (imgAvatar.getTag() == null) {
                     Toast.makeText(RegisterActivity.this, "select your avatar", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 String AVATAR = imgAvatar.getTag().toString();
+                String City = sprCity.getSelectedItem().toString();
 
-                if (Mobile > 0 && FirstName.length() > 0 &&  Family.length() > 0) {
-                    if(currentUser==null)
-                        currentUser=new UserInfo();
-                    currentUser.Mobile=Mobile;
-                    currentUser.FirstName=FirstName;
-                    currentUser.Family=Family;
-                    currentUser.Age=Age;
-                    currentUser.Email=Email;
-                    currentUser.AVATAR=AVATAR;
+                if (City.length() < 3) {
+                    Toast.makeText(RegisterActivity.this, "enter your city", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (Mobile > 0 && FirstName.length() > 0 && Family.length() > 0) {
+                    if (currentUser == null)
+                        currentUser = new UserInfo();
+                    currentUser.Mobile = Mobile;
+                    currentUser.FirstName = FirstName;
+                    currentUser.Family = Family;
+                    currentUser.Age = Age;
+                    currentUser.Email = Email;
+                    currentUser.AVATAR = AVATAR;
+                    currentUser.City = City;
 
                     UserController.INSTANCE.addOrUpdateUser(currentUser);
                     UserController.INSTANCE.signIn(currentUser);
@@ -95,7 +114,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        Button btnClear=findViewById(R.id.btnClear);
+        Button btnClear = findViewById(R.id.btnClear);
         btnClear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,12 +123,13 @@ public class RegisterActivity extends AppCompatActivity {
                 ((EditText) findViewById(R.id.edtAge)).setText("");
                 ((EditText) findViewById(R.id.edtEmail)).setText("");
                 ((EditText) findViewById(R.id.edtMobile)).setText("");
+                ((Spinner) findViewById(R.id.sprCity)).setSelection(0);
                 ((RoundedImageView) findViewById(R.id.imgAvatar)).setTag("");
                 ((RoundedImageView) findViewById(R.id.imgAvatar)).setImageURI(Uri.parse(""));
             }
         });
 
-        RoundedImageView imgAvatar=findViewById(R.id.imgAvatar);
+        RoundedImageView imgAvatar = findViewById(R.id.imgAvatar);
         imgAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

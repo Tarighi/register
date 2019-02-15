@@ -9,6 +9,7 @@ public class UserInfo {
     public String Email;
     public long Mobile;//09334445586
     public String AVATAR;
+    public String City;
     public String RoleName;
     //to display object as a string in spinner
     @Override

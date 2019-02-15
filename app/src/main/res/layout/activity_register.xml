@@ -111,6 +111,30 @@
         </LinearLayout>
 
         <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:padding="2dp"
+            android:text="@string/mobile"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/edtMobile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/backwithborder4edt"
+
+            android:hint="@string/enter_your_mobile_number"
+            android:inputType="phone"
+            android:padding="2dp"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp">
@@ -119,21 +143,15 @@
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:padding="2dp"
-                android:text="@string/mobile"
+                android:text="@string/city"
                 android:textSize="20sp" />
-
-            <EditText
-                android:id="@+id/edtMobile"
+            <Spinner
+                android:id="@+id/sprCity"
+                android:textSize="20sp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/backwithborder4edt"
+                android:layout_height="60dp"/>
 
-                android:hint="@string/enter_your_mobile_number"
-                android:inputType="phone"
-                android:padding="2dp"
-                android:textSize="20sp" />
         </LinearLayout>
-
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/imgAvatar"
@@ -142,7 +160,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="44dp"
             android:background="@drawable/ic_launcher_background"
-            android:scaleType="fitXY"
+            android:scaleType="centerCrop"
             app:riv_corner_radius="30dip"
             app:riv_border_width="2dip"
             app:riv_border_color="#333333"
