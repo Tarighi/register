@@ -1,8 +1,14 @@
 package com.tarighi.register;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -19,6 +25,7 @@ import com.fxn.pix.Pix;
 import com.fxn.utility.PermUtil;
 import com.makeramen.roundedimageview.RoundedImageView;
 
+import java.security.Permission;
 import java.util.ArrayList;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -133,7 +140,15 @@ public class RegisterActivity extends AppCompatActivity {
         imgAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Pix.start(RegisterActivity.this, Constant.ImageSelectorRequestCode);
+
+                if(ContextCompat.checkSelfPermission(RegisterActivity.this, Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED){
+                    requestCAMERAPermission();
+                }
+                else
+                {
+                    Pix.start(RegisterActivity.this, Constant.ImageSelectorRequestCode);
+                }
+
             }
         });
 
@@ -163,11 +178,32 @@ public class RegisterActivity extends AppCompatActivity {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Pix.start(RegisterActivity.this, Constant.ImageSelectorRequestCode);
                 } else {
-                    Toast.makeText(RegisterActivity.this, "Approve permissions to open ImagePicker", Toast.LENGTH_LONG).show();
+                    requestCAMERAPermission();
                 }
                 return;
             }
         }
+    }
+
+    private  void requestCAMERAPermission()
+    {
+        AlertDialog alertDialog = new AlertDialog.Builder(RegisterActivity.this).create();
+        alertDialog.setTitle("Grant Permission");
+        alertDialog.setMessage(getString(R.string.grantCamera));
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        ActivityCompat.requestPermissions(RegisterActivity.this,new String[]{ Manifest.permission.CAMERA,Manifest.permission.READ_EXTERNAL_STORAGE},PermUtil.REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS);
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
     }
 
 

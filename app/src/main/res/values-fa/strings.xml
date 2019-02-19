@@ -28,5 +28,6 @@
     <string name="login_empty_mobile">برای ورود شماره موبایل خود را وارد نمایید</string>
     <string name="city">City</string>
     <string name="enter_your_city">Enter Your City</string>
+    <string name="grantCamera">Approve permissions to open ImagePicker</string>
 
 </resources>

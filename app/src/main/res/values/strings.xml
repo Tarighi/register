@@ -29,6 +29,7 @@
     <string name="login_empty_mobile">Enter Mobile Number to Sigin</string>
 
     <string name="enter_your_city">Enter Your City</string>
+    <string name="grantCamera">Approve permissions to open ImagePicker</string>
 
     <string-array name="cities_array">
         <item>Tehran</item>
