@@ -8,7 +8,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -21,16 +25,12 @@ import com.tarighi.register.Helpers.OnAPIResponseEventListener;
 import com.tarighi.register.Helpers.TimingController;
 import com.tarighi.register.Helpers.Timings;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
 public class MainActivity extends AppCompatActivity {
 
     UserInfo currentUser;
     private DrawerLayout mDrawerLayout;
     TimingController timingController;
+    boolean backPressed=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,13 +54,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
         Button btnEdit =findViewById(R.id.btnEdit);
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(MainActivity.this,RegisterActivity.class);
-                startActivityForResult(intent,Constant.RegisterRequestCode);
-                mDrawerLayout.closeDrawers();
+                Goto(RegisterActivity.class,Constant.RegisterRequestCode);
             }
         });
 
@@ -68,9 +68,7 @@ public class MainActivity extends AppCompatActivity {
         btnShow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(MainActivity.this,ConfirmActivity.class);
-                startActivityForResult(intent,Constant.ConfirmRequestCode);
-                mDrawerLayout.closeDrawers();
+                Goto(ConfirmActivity.class,Constant.ConfirmRequestCode);
             }
         });
 //
@@ -78,12 +76,64 @@ public class MainActivity extends AppCompatActivity {
         btnViewList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(MainActivity.this,RecyclerActivity.class);
-                startActivityForResult(intent,Constant.RecyclerRequestCode);
-                mDrawerLayout.closeDrawers();
+                Goto(RecyclerActivity.class,Constant.RecyclerRequestCode);
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(backPressed)
+        {
+            super.onBackPressed();
+        }
+
+        else {
+            backPressed=true;
+            Toast.makeText(MainActivity.this, "Press Back again to SignOut", Toast.LENGTH_SHORT).show();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                        backPressed = false;
+                    }
+            },2500);
+        }
+
+    }
+
+    private void Goto(Class<?> cls, int requestCode)
+    {
+        Intent intent =new Intent(MainActivity.this,cls);
+        startActivityForResult(intent,requestCode);
+        mDrawerLayout.closeDrawers();
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater=getMenuInflater();
+        inflater.inflate(R.menu.main_menu,menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.mnuEdit:
+                Goto(RegisterActivity.class,Constant.RegisterRequestCode);
+                break;
+            case R.id.mnuShow:
+                Goto(ConfirmActivity.class,Constant.ConfirmRequestCode);
+                break;
+            case R.id.mnuViewList:
+                Goto(RecyclerActivity.class,Constant.RecyclerRequestCode);
+                break;
+        }
+        return  true;
     }
 
     @Override
@@ -106,9 +156,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-    private static String cityName = "tehran";
-    private static String api_url = "https://api.aladhan.com/v1/timingsByCity?city=" + cityName + "&country=iran&method=8";
 
     private  void setTimings(Timings data)
     {

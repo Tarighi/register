@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -15,18 +17,26 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.orhanobut.hawk.Hawk;
+import com.tarighi.register.Helpers.MyBroadcastReceiver;
 
 import java.util.List;
 
 
 public class LoginActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Hawk.init(LoginActivity.this).build();
-//
+
+        IntentFilter intentFilter=new IntentFilter();
+        intentFilter.addAction("android.intent.action.AIRPLANE_MODE");
+        intentFilter.addAction("android.intent.action.INPUT_METHOD_CHANGED");
+        MyBroadcastReceiver receiver=new MyBroadcastReceiver();
+        registerReceiver(receiver,intentFilter);
+
         SetView();
 
         Button btnSignIn = findViewById(R.id.btnSignIn);
@@ -74,6 +84,8 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
+
+
 
     @Override
     protected void onResume() {
